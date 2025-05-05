@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 import fetch from 'node-fetch';
 dotenv.config();
 
-const APP_URL = process.env.NEXT_CLIENT_PRIVATE_URL || 'https://fpl-mcp-chat-production.up.railway.app';
+const APP_URL = `https://${process.env.NEXT_CLIENT_PRIVATE_URL}` || 'https://fpl-mcp-chat.railway.internal';
 const CRON_SECRET = process.env.CRON_SECRET;
 
 console.log(`Starting FPL live refresh job at ${new Date().toISOString()}`);
