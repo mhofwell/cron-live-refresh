@@ -2,17 +2,21 @@ import dotenv from 'dotenv';
 import fetch from 'node-fetch';
 dotenv.config();
 
-const APP_URL = `https://${process.env.NEXT_CLIENT_PRIVATE_URL}` || 'https://fpl-mcp-chat.railway.internal';
+const BASE_URL = process.env.NEXT_CLIENT_PRIVATE_URL || 'fpl-mcp-chat.railway.internal';
+const APP_URL = `https://${BASE_URL}`;
+const API_ENDPOINT = `${APP_URL}/api/cron/sync-fpl/live-updates`; 
 const CRON_SECRET = process.env.CRON_SECRET;
 
 console.log(`Starting FPL live refresh job at ${new Date().toISOString()}`);
-
+console.log(CRON_SECRET);
+console.log(APP_URL);
+console.log(API_ENDPOINT);
 // Execute the refresh endpoint
 (async () => {
     try {
-        console.log(`Calling live refresh endpoint at ${APP_URL}/api/cron/sync-fpl/live-updates`);
+        console.log(`Calling live refresh endpoint at ${API_ENDPOINT}`);
 
-        const response = await fetch(`${APP_URL}/api/cron/sync-fpl/live-updates`, {
+        const response = await fetch(API_ENDPOINT, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
