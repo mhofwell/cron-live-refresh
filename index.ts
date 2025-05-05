@@ -26,6 +26,7 @@ console.log(API_ENDPOINT);
                 Authorization: `Bearer ${CRON_SECRET}`,
             },
         });
+        // comment
 
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -37,6 +38,5 @@ console.log(API_ENDPOINT);
         console.error('Error running live refresh job:', error);
         process.exit(1); // Exit with error code
     }
-
     console.log('Live refresh job execution complete');
 })();
