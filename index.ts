@@ -3,7 +3,7 @@ import fetch from 'node-fetch';
 dotenv.config();
 
 const BASE_URL = process.env.NEXT_CLIENT_PRIVATE_URL || 'fpl-mcp-chat.railway.internal';
-const APP_URL = `https://${BASE_URL}`;
+const APP_URL = `https://${BASE_URL}?family=0/`;
 const API_ENDPOINT = `${APP_URL}/api/cron/sync-fpl/live-updates`; 
 const CRON_SECRET = process.env.CRON_SECRET;
 
