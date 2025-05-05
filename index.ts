@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import fetch from 'node-fetch';
+import { shouldRunCronJob } from './utils/schedule-helper.js';
 dotenv.config();
 
 const NEXT_CLIENT_PORT = process.env.NEXT_CLIENT_PORT || 3000;
@@ -17,6 +18,13 @@ console.log(API_ENDPOINT);
 // Execute the refresh endpoint
 (async () => {
     try {
+        // Check if we should run based on the current schedule
+        const shouldRun = await shouldRunCronJob('live-update');
+        if (!shouldRun) {
+            console.log('No active match windows found, skipping live refresh');
+            process.exit(0); // Exit successfully without error
+        }
+
         console.log(`Calling live refresh endpoint at ${API_ENDPOINT}`);
 
         const response = await fetch(API_ENDPOINT, {
